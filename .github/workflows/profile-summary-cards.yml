@@ -3,8 +3,9 @@ name: GitHub-Profile-Summary-Cards
 on:
   create:
   push:
-  schedule: # execute every 24 hours
-    - cron: "* */24 * * *"
+  schedule:
+    # Once a day at 03:17 JST (18:17 UTC), after the Japanese day has ended.
+    - cron: "17 18 * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,3 +20,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PROFILE_SUMMARY_TOKEN }}
         with:
           USERNAME: ${{ github.repository_owner }}
+          # Count commits by hour in Japan time (UTC+9).
+          UTC_OFFSET: 9
